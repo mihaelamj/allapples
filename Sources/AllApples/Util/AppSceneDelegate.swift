@@ -27,6 +27,7 @@ public class AppSceneDelegate {
   #endif
   
   #if os(iOS) || os(tvOS)
+  @available(iOS 13.0, *)
   public static func makeSplitViewWindow_iOS(theScene:UIWindowScene, theVC: AViewController) -> AWindow {
     let window = AWindow(frame: theScene.coordinateSpace.bounds)
     window.windowScene = theScene
