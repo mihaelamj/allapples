@@ -17,7 +17,7 @@ import Cocoa
 
 public class AppSceneDelegate {
   #if os(OSX)
-  public static func makeSplitViewWindow_Mac(theVC: AViewController) -> AWindow? {
+  public static func makeWindow_Mac(theVC: AViewController) -> AWindow? {
     let win = AWindow(contentRect: NSMakeRect(0, 0, AScreen.main?.frame.width ?? 100, AScreen.main?.frame.height ?? 100), styleMask: [.miniaturizable, .closable, .resizable, .titled], backing: .buffered, defer: false)
     win.title = "Many 🍎!"
     win.contentViewController = theVC
@@ -28,7 +28,7 @@ public class AppSceneDelegate {
   
   #if os(iOS) || os(tvOS)
   @available(iOS 13.0, *)
-  public static func makeSplitViewWindow_iOS(theScene:UIWindowScene, theVC: AViewController) -> AWindow {
+  public static func makeWindow_iOS(theScene:UIWindowScene, theVC: AViewController) -> AWindow {
     let window = AWindow(frame: theScene.coordinateSpace.bounds)
     window.windowScene = theScene
     window.rootViewController = theVC
