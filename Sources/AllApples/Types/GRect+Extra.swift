@@ -110,3 +110,23 @@ extension CGRect {
     }
   }
 }
+
+public extension AView {
+  func readableRect() -> CGRect {
+    #if os(iOS) || os(tvOS)
+    return readableContentGuide.layoutFrame
+    #endif
+    #if os(OSX)
+    return bounds
+    #endif
+  }
+  
+  func safeAreaRect() -> CGRect {
+    #if os(iOS) || os(tvOS)
+    return safeAreaLayoutGuide.layoutFrame
+    #endif
+    #if os(OSX)
+    return bounds
+    #endif
+  }
+}
