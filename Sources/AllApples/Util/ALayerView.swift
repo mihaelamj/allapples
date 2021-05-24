@@ -18,7 +18,7 @@ open class ALayerView: AView {
   // MARK: -
   // MARK: Init -
   
-  override init(frame: CGRect) {
+  override public init(frame: CGRect) {
     super.init(frame: frame)
     setupLayerInternal()
     customInit()
@@ -30,7 +30,7 @@ open class ALayerView: AView {
     customInit()
   }
   
-  convenience init() {
+  public convenience init() {
     self.init(frame: .zero)
   }
   
