@@ -19,3 +19,15 @@ extension NSScreen {
 }
 #endif
 
+public extension AScreen {
+  static func supposedSize() -> CGSize {
+    #if os(iOS) || os(tvOS)
+    return AScreen.main.bounds.size
+    #endif
+    
+    #if os(OSX)
+    return AScreen.main?.visibleFrame.size ?? CGSize(width: 500.0, height: 500.0)
+    #endif
+  }
+}
+
