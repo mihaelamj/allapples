@@ -15,6 +15,23 @@ public extension NSView {
     layerContentsRedrawPolicy = .onSetNeedsDisplay
   }
 }
+
+public extension NSView {
+  func debugLayerInfo() {
+    debugPrint("wantsLayer = \(wantsLayer)")
+    debugPrint("wantsUpdateLayer = \(wantsUpdateLayer)")
+    debugPrint("isFlipped = \(isFlipped)")
+    debugPrint("layerContentsRedrawPolicy == .onSetNeedsDisplay \(layerContentsRedrawPolicy == .onSetNeedsDisplay)")
+  }
+}
 #endif
 
-
+#if os(iOS) || os(tvOS)
+import UIKit
+public extension UIView {
+  func debugLayerInfo() {
+    debugPrint("wantsLayer = True")
+    debugPrint("isFlipped = True")
+  }
+}
+#endif
