@@ -18,3 +18,43 @@ extension NSColor {
 import UIKit.UIColor
 public typealias AColor = UIColor
 #endif
+
+public extension AColor {
+  static func randomColor() -> AColor {
+    let colors = systemColors()
+    return colors.randomElement() ?? AColor.systemBlue
+  }
+  
+  static func systemColors() -> [AColor] {
+    #if os(macOS)
+    return [
+      AColor.systemRed,
+      AColor.systemBlue,
+      AColor.systemPink,
+      AColor.systemGray,
+      AColor.systemTeal,
+      AColor.systemBrown,
+      AColor.systemOrange,
+      AColor.systemPurple,
+      AColor.systemIndigo,
+      AColor.systemYellow,
+      AColor.systemGreen
+    ]
+    #else
+    return [
+      AColor.systemRed,
+      AColor.systemBlue,
+      AColor.systemPink,
+      AColor.systemGray,
+      AColor.systemTeal,
+      AColor.systemGray6,
+      AColor.systemOrange,
+      AColor.systemPurple,
+      AColor.systemIndigo,
+      AColor.systemYellow,
+      AColor.systemGreen
+    ]
+    #endif
+  }
+}
+
