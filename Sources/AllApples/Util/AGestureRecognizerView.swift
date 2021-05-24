@@ -13,7 +13,7 @@ import UIKit
 import Cocoa
 #endif
 
-public class AGestureRecognizerView: ALayerView {
+open class AGestureRecognizerView: ALayerView {
   var isOn: Bool = false
 
   
