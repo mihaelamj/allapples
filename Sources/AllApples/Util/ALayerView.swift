@@ -13,7 +13,7 @@ import UIKit
 import Cocoa
 #endif
 
-public class ALayerView: AView {
+open class ALayerView: AView {
   
   // MARK: -
   // MARK: Init -
@@ -24,7 +24,7 @@ public class ALayerView: AView {
     customInit()
   }
   
-  required init?(coder: NSCoder) {
+  required public init?(coder: NSCoder) {
     super.init(coder: coder)
     setupLayerInternal()
     customInit()
