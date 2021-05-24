@@ -37,7 +37,7 @@ open class ALayerView: AView {
   // MARK: -
   // MARK: Abstract Template -
   
-  public func customInit() { }
+  open func customInit() { }
   
 }
 
