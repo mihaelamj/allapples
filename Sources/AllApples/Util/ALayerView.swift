@@ -30,15 +30,22 @@ public class ALayerView: AView {
     customInit()
   }
   
+  convenience init() {
+    self.init(frame: .zero)
+  }
+  
   // MARK: -
   // MARK: Abstract Template -
   
-  public func customInit() {}
+  public func customInit() {
+    debugPrint("customInit")
+  }
   
 }
 
 private extension ALayerView {
   func setupLayerInternal() {
+    debugPrint("setupLayerInternal")
     #if os(OSX)
     makeLikeUIView()
     #endif

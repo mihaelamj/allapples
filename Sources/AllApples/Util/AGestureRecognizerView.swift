@@ -48,16 +48,50 @@ private extension AGestureRecognizerView {
   
   func setupRecognizers() {
     setupPanGestureRecognizer()
-    
-    #if os(OSX)
     setupClickGestureRecognizer()
-    #endif
     
     #if os(iOS) || os(tvOS)
     setupRotationDetector()
     setupPinchGestureRecognizer()
-    setupTapGestureRecognizer()
     #endif
+  }
+  
+}
+
+// MARK: -
+// MARK: Movement  -
+
+extension AGestureRecognizerView {
+  
+  private func setupPanGestureRecognizer() {
+    let panGR = APanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+    addGestureRecognizer(panGR)
+  }
+  
+  @objc func handlePanGesture(_ gestureRecognizer: APanGestureRecognizer) {
+    let displacement: CGPoint = gestureRecognizer.translation(in: self)
+    handlePan(displacement: displacement, changed: gestureRecognizer.state == .changed)
+    if gestureRecognizer.state == .changed {
+      gestureRecognizer.setTranslation(.zero, in: self)
+    }
+  }
+  
+}
+
+// MARK: -
+// MARK: Click / Tap  -
+
+extension AGestureRecognizerView {
+  
+  private func setupClickGestureRecognizer() {
+    let clickGR = ATapGestureRecognizer(target: self, action: #selector(handleClick(_:)))
+    addGestureRecognizer(clickGR)
+  }
+  
+  @objc func handleClick(_ gestureRecognizer: ATapGestureRecognizer) {
+    if gestureRecognizer.state == .ended {
+      handleClickTap()
+    }
   }
   
 }
@@ -94,42 +128,6 @@ extension AGestureRecognizerView {
 }
 
 // MARK: -
-// MARK: Movement  -
-
-extension AGestureRecognizerView {
-  
-  #if os(OSX)
-  private func setupPanGestureRecognizer() {
-    let panGR = NSPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-    addGestureRecognizer(panGR)
-  }
-  
-  @objc func handlePanGesture(_ gestureRecognizer: NSPanGestureRecognizer) {
-    let displacement: CGPoint = gestureRecognizer.translation(in: self)
-    handlePan(displacement: displacement, changed: gestureRecognizer.state == .changed)
-  }
-  #endif
-  
-  #if os(iOS) || os(tvOS)
-  private func setupPanGestureRecognizer() {
-    let panGR = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-    addGestureRecognizer(panGR)
-  }
-  
-  @objc func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
-    let displacement: CGPoint = gestureRecognizer.translation(in: self)
-    
-    handlePan(displacement: displacement, changed: gestureRecognizer.state == .changed)
-    
-    if gestureRecognizer.state == .changed {
-      gestureRecognizer.setTranslation(.zero, in: self)
-    }
-  }
-  #endif
-  
-}
-
-// MARK: -
 // MARK: Scale  -
 
 extension AGestureRecognizerView {
@@ -154,38 +152,6 @@ extension AGestureRecognizerView {
     gestureRecognizer.scale = 1
   }
   
-  #endif
-}
-
-// MARK: -
-// MARK: Click / Tap  -
-
-extension AGestureRecognizerView {
-  
-  #if os(OSX)
-  private func setupClickGestureRecognizer() {
-    let clickGR = NSClickGestureRecognizer(target: self, action: #selector(click(_:)))
-    addGestureRecognizer(clickGR)
-  }
-  
-  @objc func click(_ gestureRecognizer: NSClickGestureRecognizer) {
-    if gestureRecognizer.state == .ended {
-      handleClickTap()
-    }
-  }
-  #endif
-  
-  #if os(iOS) || os(tvOS)
-  private func setupTapGestureRecognizer() {
-    let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
-    addGestureRecognizer(tapGR)
-  }
-  
-  @objc func handleTapGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
-    if gestureRecognizer.state == .ended {
-      handleClickTap()
-    }
-  }
   #endif
 }
 
