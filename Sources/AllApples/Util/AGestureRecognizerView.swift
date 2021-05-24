@@ -30,9 +30,7 @@ open class AGestureRecognizerView: ALayerView {
 // MARK: Template Methods,  -
 
 public extension AGestureRecognizerView {
-  @objc func rotationChanged(degrees: Float) {}
-  
-  @objc func rotationChanged(radians: Float) {}
+  @objc func rotationChanged(degrees: Float, radians: Float) {}
   
   @objc func displacementChanged(displacement: CGPoint) {}
   
@@ -106,8 +104,7 @@ extension AGestureRecognizerView {
     let rotation = event.rotation
     debugPrint("rotation in degrees is: \(rotation)")
     let radians = rotation * .pi / 180
-    handleRotation(radians: Float(radians))
-    handleRotation(degrees: Float(rotation))
+    handleRotation(degrees: Float(rotation), radians: Float(radians))
   }
   #endif
   
@@ -120,8 +117,7 @@ extension AGestureRecognizerView {
   @objc func handleRotateGesture(_ gestureRecognizer: UIRotationGestureRecognizer) {
     let rotation = gestureRecognizer.rotation // in radians
     let degrees = rotation * 180 / .pi
-    handleRotation(radians: Float(rotation))
-    handleRotation(degrees: Float(degrees))
+    handleRotation(degrees: Float(degrees), radians: Float(rotation))
     gestureRecognizer.rotation = 0
   }
   #endif
@@ -160,37 +156,25 @@ extension AGestureRecognizerView {
 
 private extension AGestureRecognizerView {
   
-  @objc func handleRotation(radians: Float) {
-    debugPrint("Rotation in radians: \(radians)")
-    rotationChanged(radians: radians)
-  }
-  
-  @objc func handleRotation(degrees: Float) {
-    debugPrint("Rotation in degrees: \(degrees)")
-    rotationChanged(degrees: degrees)
+  @objc func handleRotation(degrees: Float, radians: Float) {
+    rotationChanged(degrees: degrees, radians: radians)
   }
   
   @objc func handlePan(displacement: CGPoint, changed: Bool) {
     guard changed == true else { return }
-    debugPrint("Displacement point: \(displacement)")
     displacementChanged(displacement: displacement)
   }
   
   @objc func handleScale(scale: CGFloat) {
-    // scale
-    debugPrint("Scale: \(scale)")
     scaleChanged(scale: scale)
   }
   
   @objc func handleMagnification(magnification: CGFloat) {
-    // scale
-    debugPrint("Magnification: \(magnification)")
     scaleChanged(scale: 1 + magnification)
   }
   
   @objc func handleClickTap() {
     isOn.toggle()
-    debugPrint("Tap, isOn: \(isOn)")
     tapHappened()
   }
 }
