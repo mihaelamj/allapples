@@ -16,6 +16,19 @@ public typealias ViewType = NSView
 #if os(iOS) || os(tvOS) || os(macOS)
 open class AView: ViewType {
   
+  public var forcedLayer: CALayer {
+    #if os(iOS) || os(tvOS)
+    return layer
+    #endif
+    
+    #if os(OSX)
+    guard let aLayer = layer else {
+      fatalError("Layer == `nil`")
+    }
+    return aLayer
+    #endif
+  }
+  
   public var myColor: AColor? {
     set {
       #if os(iOS) || os(tvOS)
@@ -37,6 +50,17 @@ open class AView: ViewType {
       #endif
     }
   }
+  
+  #if os(OSX)
+  // set geometry like UIView
+  public override var isFlipped: Bool {
+    return true
+  }
+  // allows you to safely directly access the layer
+  public override var wantsUpdateLayer : Bool {
+    return true 
+  }
+  #endif
   
   #if os(macOS)
   open var userInteractionEnabled: Bool {

@@ -22,6 +22,8 @@ public class AppSceneDelegate {
     win.title = "Many 🍎!"
     win.contentViewController = theVC
     win.makeKeyAndOrderFront(nil)
+    
+    win.contentView?.makeLikeUIView()
     return win
   }
   #endif

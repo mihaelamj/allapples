@@ -9,8 +9,13 @@
 import UIKit.UIGestureRecognizer
 public typealias AGestureRecognizer = UIGestureRecognizer
 public typealias ATapGestureRecognizer = UITapGestureRecognizer
+
+public typealias APanGestureRecognizer = UIPanGestureRecognizer
+
 #elseif os(macOS)
 import AppKit.NSGestureRecognizer
 @available(OSX 10.10, *) public typealias AGestureRecognizer = NSGestureRecognizer
 @available(OSX 10.10, *) public typealias ATapGestureRecognizer = NSClickGestureRecognizer
+
+@available(OSX 10.10, *) public typealias APanGestureRecognizer = NSPanGestureRecognizer
 #endif
