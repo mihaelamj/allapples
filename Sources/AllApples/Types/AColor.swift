@@ -37,7 +37,6 @@ public extension AColor {
       AColor.systemBrown,
       AColor.systemOrange,
       AColor.systemPurple,
-      AColor.systemIndigo,
       AColor.systemYellow,
       AColor.systemGreen
     ]
