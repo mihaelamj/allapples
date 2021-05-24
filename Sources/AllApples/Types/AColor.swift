@@ -19,6 +19,7 @@ import UIKit.UIColor
 public typealias AColor = UIColor
 #endif
 
+@available(macOS 10.15, *)
 public extension AColor {
   static func randomColor() -> AColor {
     let colors = systemColors()
