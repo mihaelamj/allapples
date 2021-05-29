@@ -35,6 +35,20 @@ open class ALayerView: AView {
   }
   
   // MARK: -
+  // MARK: Init -
+  
+  #if os(OSX)
+  // set geometry like UIView
+  open override var isFlipped: Bool {
+    return true
+  }
+
+  open override var wantsUpdateLayer : Bool {
+    return true
+  }
+  #endif
+  
+  // MARK: -
   // MARK: Abstract Template -
   
   open func customInit() { }

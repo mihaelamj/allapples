@@ -51,16 +51,16 @@ open class AView: ViewType {
     }
   }
   
-  #if os(OSX)
-  // set geometry like UIView
-  public override var isFlipped: Bool {
-    return true
-  }
-  // allows you to safely directly access the layer
-  public override var wantsUpdateLayer : Bool {
-    return true 
-  }
-  #endif
+//  #if os(OSX)
+//  // set geometry like UIView
+//  open override var isFlipped: Bool {
+//    return true
+//  }
+//
+//  open override var wantsUpdateLayer : Bool {
+//    return true
+//  }
+//  #endif
   
   #if os(macOS)
   open var userInteractionEnabled: Bool {

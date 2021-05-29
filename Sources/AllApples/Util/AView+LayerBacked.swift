@@ -21,7 +21,8 @@ public extension NSView {
     debugPrint("wantsLayer = \(wantsLayer)")
     debugPrint("wantsUpdateLayer = \(wantsUpdateLayer)")
     debugPrint("isFlipped = \(isFlipped)")
-    debugPrint("layerContentsRedrawPolicy == .onSetNeedsDisplay \(layerContentsRedrawPolicy == .onSetNeedsDisplay)")
+    debugPrint("layerContentsRedrawPolicy = \(layerContentsRedrawPolicy.toString())")
+    debugPrint("\(layerContentsRedrawPolicy.explanation())")
   }
 }
 #endif
