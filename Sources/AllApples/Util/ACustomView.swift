@@ -17,16 +17,16 @@ public class ACustomView: AView {
   
   var viewOptions: AViewOptions = .likeUIKit
   
-    #if os(OSX)
-    // set geometry like UIView
-    open override var isFlipped: Bool {
-      return viewOptions.contains(.isFlipped)
-    }
+  #if os(OSX)
+  // set geometry like UIView
+  open override var isFlipped: Bool {
+    return viewOptions.contains(.isFlipped)
+  }
   
-    open override var wantsUpdateLayer : Bool {
-      return viewOptions.contains(.wantsUpdateLayer)
-    }
-    #endif
+  open override var wantsUpdateLayer : Bool {
+    return viewOptions.contains(.wantsUpdateLayer)
+  }
+  #endif
   
   // MARK: -
   // MARK: Init -
@@ -36,13 +36,13 @@ public class ACustomView: AView {
     setupLayerInternal()
     customInit()
   }
-    
+  
   required public init() {
     super.init(frame: .zero)
     setupLayerInternal()
     customInit()
   }
-    
+  
   required public init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
